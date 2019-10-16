@@ -52,6 +52,11 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(!isOnline(getApplicationContext())){
+            Intent intent = new Intent(getApplicationContext(),Connection.class);
+            startActivity(intent);
+
+        }
         setContentView(R.layout.activity_main);
         // toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -71,7 +76,7 @@ public class MainActivity extends AppCompatActivity  {
             NewsUtils task = new NewsUtils();
             task.execute();
         }else {
-            Toast.makeText(getApplicationContext(),"Dispositivo sem conexão com internet",Toast.LENGTH_LONG).show();
+          //  Toast.makeText(getApplicationContext(),"Dispositivo sem conexão com internet",Toast.LENGTH_LONG).show();
         }
 
         newsArrayList = new ArrayList<>();
