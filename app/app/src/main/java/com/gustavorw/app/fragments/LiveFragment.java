@@ -9,11 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.gustavorw.app.R;
+
 public class LiveFragment extends Fragment {
+    public LiveFragment(){}
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View viewRoot = inflater.inflate(R.layout.fragment_live,container, false);
+        return viewRoot;
     }
 }
