@@ -1,5 +1,7 @@
 package com.gustavorw.app;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -11,9 +13,11 @@ import com.gustavorw.app.Fragments.NewsFragment;
 
 public class MyFragmentPagerAdapter  extends FragmentPagerAdapter {
     private String[] arrayTab;
-    public MyFragmentPagerAdapter(@NonNull FragmentManager fm, String[] arrayTab) {
+    private Context context;
+    public MyFragmentPagerAdapter(@NonNull FragmentManager fm, String[] arrayTab, Context context) {
         super(fm);
         this.arrayTab = arrayTab;
+        this.context = context;
     }
 
     @NonNull
@@ -24,7 +28,7 @@ public class MyFragmentPagerAdapter  extends FragmentPagerAdapter {
                 LiveFragment liveFragment = new LiveFragment();
                 return liveFragment;
             case 1:
-                NewsFragment newsFragment = new NewsFragment();
+                NewsFragment newsFragment = new NewsFragment(context);
                 return newsFragment;
             default:
                 return null;

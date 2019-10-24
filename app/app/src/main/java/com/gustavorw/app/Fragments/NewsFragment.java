@@ -1,5 +1,6 @@
 package com.gustavorw.app.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -26,6 +27,7 @@ import com.gustavorw.app.News.News;
 import com.gustavorw.app.News.NewsAdapter;
 import com.gustavorw.app.News.RecyclerItemClickListenerNews;
 import com.gustavorw.app.R;
+import com.gustavorw.app.Webview;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +46,9 @@ import java.util.ArrayList;
 import static android.nfc.tech.MifareUltralight.PAGE_SIZE;
 
 public class NewsFragment extends Fragment {
-    public NewsFragment() {
+    private Context mContext;
+    public NewsFragment(Context context) {
+        this.mContext = context;
     }
 
     private RecyclerView recyclerView;
@@ -92,9 +96,9 @@ public class NewsFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 News aux = newsArrayList.get(position);
-                //Intent intent = new Intent(getApplicationContext(),Webview.class);
-                //intent.putExtra("link",aux.getLink());
-                //startActivity(intent);
+                Intent intent = new Intent(getContext().getApplicationContext(), Webview.class);
+                intent.putExtra("link",aux.getLink());
+                startActivity(intent);
             }
 
             @Override

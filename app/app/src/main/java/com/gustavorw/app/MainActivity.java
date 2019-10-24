@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // tab layout & viewPager
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), getResources().getStringArray(R.array.tabNames)));
+        viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), getResources().getStringArray(R.array.tabNames), getApplicationContext()));
         tabLayout.setupWithViewPager(viewPager);
         // navigation
         navigationView = findViewById(R.id.nav_view);
