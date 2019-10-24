@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.gustavorw.app.fragments.LiveFragment;
-import com.gustavorw.app.fragments.NewsFragment;
+import com.gustavorw.app.Fragments.LiveFragment;
+import com.gustavorw.app.Fragments.NewsFragment;
 
 public class MyFragmentPagerAdapter  extends FragmentPagerAdapter {
     private String[] arrayTab;

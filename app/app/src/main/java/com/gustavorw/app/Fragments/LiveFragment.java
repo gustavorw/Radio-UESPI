@@ -1,4 +1,4 @@
-package com.gustavorw.app.fragments;
+package com.gustavorw.app.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,12 +11,13 @@ import androidx.fragment.app.Fragment;
 
 import com.gustavorw.app.R;
 
-public class NewsFragment extends Fragment {
-    public NewsFragment(){}
+public class LiveFragment extends Fragment {
+    public LiveFragment(){}
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View viewRoot = inflater.inflate(R.layout.fragment_news, container, false);
+        View viewRoot = inflater.inflate(R.layout.fragment_live,container, false);
         return viewRoot;
     }
 }

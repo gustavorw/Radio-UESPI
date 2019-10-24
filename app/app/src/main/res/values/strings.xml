@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">app</string>
+    <string name="app_name">Radio Uespi</string>
     <string name="action_settings">Settings</string>
     <string-array name="tabNames">
         <item>Ao vivo</item>
