@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
 
@@ -39,16 +41,17 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
+import static android.nfc.tech.MifareUltralight.PAGE_SIZE;
+
 public class NewsFragment extends Fragment {
     public NewsFragment() {
     }
-
-    @Nullable
 
     private RecyclerView recyclerView;
     private ArrayList<News> newsArrayList;
     private NewsAdapter newsAdapter;
     private ProgressBar progressBar;
+    private boolean isScrolling = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,8 +61,32 @@ public class NewsFragment extends Fragment {
         newsArrayList = new ArrayList<>();
         NewsUtils task = new NewsUtils();
         task.execute();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext().getApplicationContext());
+        final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
+                    isScrolling = true;
+                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int currentItems = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int scrollOutItems = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+                if(isScrolling && (currentItems + scrollOutItems == totalItemCount)){
+
+                    //data();
+                }
+
+
+
+            }
+        });
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListenerNews(getContext().getApplicationContext(), recyclerView, new RecyclerItemClickListenerNews.OnItemClickListener() {
             @Override
@@ -84,6 +111,14 @@ public class NewsFragment extends Fragment {
 
     }
 
+    private void data(){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }, 5000);
+    }
 
     public void updateUI(ArrayList<News> newsArray) {
         newsArrayList = newsArray;

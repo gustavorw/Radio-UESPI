@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
     android:elevation="7dp"
+    android:background="@color/itemList"
     android:orientation="horizontal">
 
     <TextView
