@@ -5,4 +5,6 @@
         <item>Ao vivo</item>
         <item>Notícias</item>
     </string-array>
+    <string name="open_drawer">open</string>
+    <string name="close_drawer">close</string>
 </resources>
