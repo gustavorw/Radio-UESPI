@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gustavorw.app.MainActivity;
 import com.gustavorw.app.News.News;
 import com.gustavorw.app.News.NewsAdapter;
 import com.gustavorw.app.News.RecyclerItemClickListenerNews;
@@ -64,7 +65,8 @@ public class NewsFragment extends Fragment {
         progressBar = viewRoot.findViewById(R.id.progressBar);
         newsArrayList = new ArrayList<>();
         NewsUtils task = new NewsUtils();
-        task.execute();
+        if(MainActivity.isOnline(getContext().getApplicationContext())){
+        task.execute();}
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
