@@ -1,29 +1,29 @@
 package com.gustavorw.app.News;
 
 public class News {
-    private String title;
-    private String date;
+    private String titulo;
+    private String data;
     private String link;
-    public News(String title, String date, String link){
-        this.title = title;
-        this.date = date;
+    public News(String titulo, String data, String link){
+        this.titulo = titulo;
+        this.data = data;
         this.link = link;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitulo(String title) {
+        this.titulo = titulo;
     }
 
-    public String getDate() {
-        return date;
+    public String getData() {
+        return data;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getLink() {
