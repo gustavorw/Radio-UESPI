@@ -1,19 +1,16 @@
 package com.gustavorw.app.News;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gustavorw.app.MainActivity;
 import com.gustavorw.app.R;
-import com.gustavorw.app.Webview;
 
 import java.util.List;
 
@@ -21,11 +18,12 @@ public class NewsPostAdapter extends RecyclerView.Adapter<NewsPostAdapter.PostVi
 
     private Context context;
     private List<News> news;
+    private Activity activity;
 
-    public NewsPostAdapter(Context context, List<News> news){
+    public NewsPostAdapter(Context context, List<News> news, Activity activity){
         this.context = context;
         this.news = news;
-
+        this.activity =  activity;
     }
     @NonNull
     @Override
@@ -41,15 +39,18 @@ public class NewsPostAdapter extends RecyclerView.Adapter<NewsPostAdapter.PostVi
         final News aux = this.news.get(position);
         holder.titulo.setText(aux.getTitulo());
         holder.data.setText(aux.getData());
+        /*
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                // Toast.makeText(context,aux.getTitulo(),Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(context.getApplicationContext(),Webview.class);
-                intent.putExtra("link",aux.getLink());
+               // Intent intent = new Intent(activity, LiveFragment.class);
+               // intent.putExtra("link",aux.getLink());
+              //  context.startActivity(intent);
                // context.getApplicationContext().startActivity(intent);
+
             }
-        });
+        });*/
 
     }
 

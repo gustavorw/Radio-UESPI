@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Webview extends AppCompatActivity {
+public class NewsWebViewActivity extends AppCompatActivity {
     private WebView newsWeb;
     private ProgressBar progress;
     @Override

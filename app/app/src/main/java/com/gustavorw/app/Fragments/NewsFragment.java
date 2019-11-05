@@ -1,12 +1,16 @@
 package com.gustavorw.app.Fragments;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -18,8 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gustavorw.app.News.ApiService;
 import com.gustavorw.app.News.News;
+import com.gustavorw.app.News.NewsClickEvent;
 import com.gustavorw.app.News.NewsPostAdapter;
 import com.gustavorw.app.News.Utils;
+import com.gustavorw.app.NewsWebViewActivity;
 import com.gustavorw.app.R;
 
 import java.util.ArrayList;
@@ -49,7 +55,7 @@ public class NewsFragment extends Fragment {
     int currentItems, totalItems, scrollOutItems;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View viewRoot = inflater.inflate(R.layout.fragment_news, container, false);
         recyclerView = viewRoot.findViewById(R.id.recyclerView);
         progressBar = viewRoot.findViewById(R.id.progressBar);
@@ -57,11 +63,12 @@ public class NewsFragment extends Fragment {
         progressFist.setVisibility(View.VISIBLE);
         newsArrayList = new ArrayList<>();
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext().getApplicationContext());
-        adapter = new NewsPostAdapter(getContext().getApplicationContext(), newsArrayList);
+        adapter = new NewsPostAdapter(getContext().getApplicationContext(), newsArrayList, getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
         retrofit = Utils.getClient();
         progressBar.setVisibility(View.VISIBLE);
+
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -89,6 +96,28 @@ public class NewsFragment extends Fragment {
             }
         });
         getData();
+
+
+        recyclerView.addOnItemTouchListener(new NewsClickEvent(getContext().getApplicationContext(), recyclerView, new NewsClickEvent.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                News aux = newsArrayList.get(position);
+                Log.v("nome", aux.getTitulo() +" = " + String.valueOf(position));
+                Intent intent = new Intent(getContext().getApplicationContext(), NewsWebViewActivity.class);
+                intent.putExtra("link", aux.getLink());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        }));
 
 
         return viewRoot;
@@ -126,5 +155,10 @@ public class NewsFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+    }
 }
 

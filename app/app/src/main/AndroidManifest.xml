@@ -11,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Webview" />
         <activity
             android:screenOrientation="portrait"
             android:name=".MainActivity"
@@ -23,6 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.gustavorw.app.NewsWebViewActivity"></activity>
     </application>
 
 </manifest>
