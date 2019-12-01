@@ -4,9 +4,9 @@ public class News {
     private String titulo;
     private String data;
     private String link;
-    public News(String titulo, String data, String link){
-        this.titulo = titulo;
-        this.data = data;
+    public News(String title, String date, String link){
+        this.titulo = title;
+        this.data = date;
         this.link = link;
     }
 
@@ -15,15 +15,15 @@ public class News {
     }
 
     public void setTitulo(String title) {
-        this.titulo = titulo;
+        this.titulo = title;
     }
 
     public String getData() {
         return data;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setData(String date) {
+        this.data = date;
     }
 
     public String getLink() {

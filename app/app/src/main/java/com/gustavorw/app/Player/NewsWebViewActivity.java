@@ -1,4 +1,4 @@
-package com.gustavorw.app;
+package com.gustavorw.app.Player;
 
 import android.content.Intent;
 import android.net.http.SslError;
@@ -12,6 +12,8 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.gustavorw.app.R;
 
 public class NewsWebViewActivity extends AppCompatActivity {
     private WebView newsWeb;

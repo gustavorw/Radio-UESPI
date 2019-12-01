@@ -38,7 +38,50 @@ public class NewsPostAdapter extends RecyclerView.Adapter<NewsPostAdapter.PostVi
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         final News aux = this.news.get(position);
         holder.titulo.setText(aux.getTitulo());
-        holder.data.setText(aux.getData());
+        String data = aux.getData();
+        data = data.substring(5,10);
+        String mes = data.substring(0,2);
+        String dia = data.substring(3,5);
+        switch (Integer.valueOf(mes)){
+            case 12:
+                mes = "dez";
+                break;
+            case 11:
+                mes = "nov";
+                break;
+            case 10:
+                mes = "out";
+                break;
+            case 9:
+                mes = "set";
+                break;
+            case 8:
+                mes = "ago";
+                break;
+            case 7:
+                mes = "jul";
+                break;
+            case 6:
+                mes = "jun";
+                break;
+            case 5:
+                mes = "mai";
+                break;
+            case 4:
+                mes = "abr";
+                break;
+            case 3:
+                mes = "mar";
+                break;
+            case 2:
+                mes = "fev";
+                break;
+            case 1:
+                mes = "jan";
+                break;
+        }
+        mes = dia + "\n"+mes;
+        holder.data.setText(mes);
         /*
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,3 +1,12 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="player_tamanho">80dp</dimen>
+    <dimen name="player_img">50dp</dimen>
+    <dimen name="player_marge">10dp</dimen>
+    <dimen name="player_progress_bar">100dp</dimen>
+    <dimen name="player_text">12sp</dimen>
+
+    <dimen name="player_logo">250dp</dimen>
+
 </resources>

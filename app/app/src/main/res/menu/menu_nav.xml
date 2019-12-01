@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group>
-        <item android:id="@+id/nav_item_one"
+        <item
+            android:id="@+id/nav_item_one"
             android:icon="@android:drawable/ic_menu_add"
-            android:title="Item 1" />
-        <item android:id="@+id/nav_item_two"
+            android:title="Radio" />
+        <item
+            android:id="@+id/nav_item_two"
             android:icon="@android:drawable/ic_menu_agenda"
-            android:title="Item 2" />
-        <item android:id="@+id/nav_item_three"
+            android:title="Notícias" />
+        <item
+            android:id="@+id/nav_item_three"
             android:icon="@android:drawable/ic_menu_call"
             android:title="Item 3" />
     </group>
-    <group android:id="@+id/group_menu">
-        <item android:id="@+id/nav_item_four"
-            android:title="Item 4" />
-        <item android:id="@+id/nav_item_five"
-            android:title="Item 5" />
-    </group>
-    <item android:title="Title 1">
+    <item android:title="Comunicação">
         <menu>
-            <item android:id="@+id/nav_item_six"
-                android:icon="@android:drawable/ic_menu_camera"
-                android:title="Item 6" />
-            <item android:id="@+id/nav_item_seven"
-                android:icon="@android:drawable/ic_menu_compass"
-                android:title="Item 7" />
+            <item
+                android:id="@+id/nav_item_six"
+                android:icon="@drawable/ic_menu_share_branco"
+                android:title="@string/share_with_friends" />
+            <item
+                android:id="@+id/nav_item_avaliar"
+                android:icon="@drawable/ic_menu_favorite"
+                android:title="@string/action_rate" />
+            <item
+                android:id="@+id/nav_item_info"
+                android:icon="@drawable/info"
+                android:title="@string/action_about" />
         </menu>
     </item>
 </menu>

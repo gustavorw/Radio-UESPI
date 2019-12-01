@@ -1,6 +1,5 @@
 package com.gustavorw.app.Fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
@@ -20,13 +18,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.gustavorw.app.News.ApiService;
 import com.gustavorw.app.News.News;
 import com.gustavorw.app.News.NewsClickEvent;
 import com.gustavorw.app.News.NewsPostAdapter;
 import com.gustavorw.app.News.Utils;
-import com.gustavorw.app.NewsWebViewActivity;
+import com.gustavorw.app.Player.NewsWebViewActivity;
 import com.gustavorw.app.R;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +43,7 @@ import static android.widget.Toast.LENGTH_LONG;
 
 public class NewsFragment extends Fragment {
     private Context mContext;
+    static int pages = 1;
 
     public NewsFragment(Context context) {
         this.mContext = context;
@@ -53,7 +57,6 @@ public class NewsFragment extends Fragment {
     Boolean isScrolling = false;
     ProgressBar progressFist;
     int currentItems, totalItems, scrollOutItems;
-
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View viewRoot = inflater.inflate(R.layout.fragment_news, container, false);
@@ -66,10 +69,10 @@ public class NewsFragment extends Fragment {
         adapter = new NewsPostAdapter(getContext().getApplicationContext(), newsArrayList, getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+
         retrofit = Utils.getClient();
         progressBar.setVisibility(View.VISIBLE);
-
-
+       // progressBar.getIndeterminateDrawable().setColorFilter(Integer.parseInt("#044875"),android.graphics.PorterDuff.Mode.MULTIPLY);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -91,18 +94,19 @@ public class NewsFragment extends Fragment {
                 {
                     progressBar.setVisibility(View.VISIBLE);
                     isScrolling = false;
+                    pages++;
                     getData();
                 }
             }
         });
-        getData();
+       getData();
 
 
         recyclerView.addOnItemTouchListener(new NewsClickEvent(getContext().getApplicationContext(), recyclerView, new NewsClickEvent.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 News aux = newsArrayList.get(position);
-                Log.v("nome", aux.getTitulo() +" = " + String.valueOf(position));
+             //   Log.v("nome", aux.getTitulo() +" = " + String.valueOf(position));
                 Intent intent = new Intent(getContext().getApplicationContext(), NewsWebViewActivity.class);
                 intent.putExtra("link", aux.getLink());
                 startActivity(intent);
@@ -119,7 +123,6 @@ public class NewsFragment extends Fragment {
             }
         }));
 
-
         return viewRoot;
 
     }
@@ -127,30 +130,31 @@ public class NewsFragment extends Fragment {
 
     private void getData() {
         ApiService service = retrofit.create(ApiService.class);
-        Call<List<News>> call = service.baseNews();
+        Call<List<News>> call = service.baseNews(pages);
         call.enqueue(new Callback<List<News>>() {
             @Override
-            public void onResponse(Call<List<News>> call, Response<List<News>> response) {
+            public void onResponse(Call<List<News>>call, Response<List<News>> response) {
                 if (response.isSuccessful()) {
                     List<News> aux = response.body();
                     for(int i = 0; i < aux.size(); i++){
                         newsArrayList.add(aux.get(i));
+                      //  Log.v("on")
                     }
                     progressBar.setVisibility(View.GONE);
                     progressFist.setVisibility(View.GONE);
-                    adapter.notifyDataSetChanged();
+                   adapter.notifyDataSetChanged();
                 }
-                Log.v("erro","sem resposta");
+                Log.v("on", "on response");
             }
 
             @Override
             public void onFailure(Call<List<News>> call, Throwable t) {
                 if(Utils.isNetwork(getContext().getApplicationContext())){
-                    Log.v("erro","sem internet");
-                    Toast.makeText(getContext().getApplicationContext(),"Sem conexão", LENGTH_LONG).show();
+                   // Log.v("erro","sem internet");
+                   // Toast.makeText(getContext().getApplicationContext(),"Sem conexão", LENGTH_LONG).show();
                 }
 
-                Log.v("erro","sem internet");
+                Log.v("erro","não foi possivel baixar os dados");
             }
         });
     }
@@ -160,5 +164,6 @@ public class NewsFragment extends Fragment {
         super.onResume();
         getData();
     }
+
 }
 

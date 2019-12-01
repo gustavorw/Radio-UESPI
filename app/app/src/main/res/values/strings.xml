@@ -1,10 +1,27 @@
 <resources>
     <string name="app_name">Radio Uespi</string>
-    <string name="action_settings">Settings</string>
+    <string name="version">Versão 1.0</string>
+
     <string-array name="tabNames">
         <item>Ao vivo</item>
         <item>Notícias</item>
     </string-array>
     <string name="open_drawer">open</string>
     <string name="close_drawer">close</string>
+
+
+    <string name="action_share">Compartilhar</string>
+    <string name="action_rate">Avaliar</string>
+    <string name="action_about">Sobre</string>
+    <string name="loading">Carregando...</string>
+    <string name="link2">https://play.google.com/store/apps/details?id=pacote</string>
+    <string name="share">Divirta-se com o melhor app de radio da Google Play, baixe em: https://play.google.com/store/apps/details?id=pacote</string>
+    <string name="via">Compartilhar via:</string>
+    <string name="close">Fechar</string>
+    <string name="app">Mais App</string>
+    <string name="privacidade">Politica de privacidade</string>
+    <string name="title_activity_sobre">Sobre</string>
+    <string name="action_settings">Configurações</string>
+    <string name="share_with_friends">Compartilhe com amigos</string>
+    <string name="communication">Comunicação</string>
 </resources>
